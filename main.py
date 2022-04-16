@@ -3,6 +3,8 @@
 # dice.py
 import random
 
+MAX_DICE = 10
+
 def roll_dice(num_dice):
     """Return a list of integers with length `num_dice`.
 
@@ -16,19 +18,19 @@ def roll_dice(num_dice):
     return roll_results
 
 def do_stuff(input_string):
-    """Return `input_string` as an integer between 1 and 6.
+    """Return `input_string` as an integer between 1 and MAX_DICE.
 
-    Check if `input_string` is an integer number between 1 and 6.
+    Check if `input_string` is an integer number between 1 and MAX_DICE.
     If so, return an integer with the same value. Otherwise, tell
     the user to enter a valid number and quit the program.
     """
-    if input_string.strip() in {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}:
-        return int(input_string)
+    if int(input_string.strip()) in range(1, MAX_DICE):
+        return int(input_string.strip())
     else:
-        print("Please enter a number from 1 to 10.")
+        print(f"Please enter a number from 1 to {MAX_DICE}.")
         raise SystemExit(1)
 
-num_dice_input = input("How many d6 dice do you want to roll? [1-10] ")
+num_dice_input = input(f"How many d6 dice do you want to roll? [1-{MAX_DICE}] ")
 num_dice = do_stuff(num_dice_input)
 
 roll_results = roll_dice(num_dice)
