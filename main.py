@@ -28,7 +28,7 @@ def do_stuff(input_string):
         print("Please enter a number from 1 to 10.")
         raise SystemExit(1)
 
-num_dice_input = input("How many dice do you want to roll? [1-10] ")
+num_dice_input = input("How many d6 dice do you want to roll? [1-10] ")
 num_dice = do_stuff(num_dice_input)
 
 roll_results = roll_dice(num_dice)
