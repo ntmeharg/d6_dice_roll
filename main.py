@@ -56,3 +56,5 @@ for ele in range(0, len(roll_results)):
 
 print(roll_results)  # Remove this line after testing the app
 print("Sum of all elements in given list: ", total)
+
+#comment test
