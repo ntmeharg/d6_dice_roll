@@ -3,7 +3,7 @@
 # dice.py
 import random
 
-MAX_DICE = 10
+MAX_DICE = 12
 
 def roll_dice(num_dice):
     """Return a list of integers with length `num_dice`.
@@ -24,7 +24,7 @@ def do_stuff(input_string):
     If so, return an integer with the same value. Otherwise, tell
     the user to enter a valid number and quit the program.
     """
-    if int(input_string.strip()) in range(1, MAX_DICE):
+    if int(input_string.strip()) in range(MAX_DICE + 1):
         return int(input_string.strip())
     else:
         print(f"Please enter a number from 1 to {MAX_DICE}.")
@@ -55,6 +55,12 @@ total = 0
 # and add them in variable total
 for ele in range(0, len(roll_results)):
     total = total + roll_results[ele]
+
+modifier_input = input("Do you have any modifiers you would like to add? y/n ")
+if modifier_input[0] == "y":
+    modifier = input("How much do you want to add? ")
+    modifier = int(modifier)
+    total = total + modifier
 
 print(roll_results)  # Remove this line after testing the app
 print("Sum of all elements in given list: ", total)
