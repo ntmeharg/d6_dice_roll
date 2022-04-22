@@ -4,6 +4,7 @@
 import random
 
 MAX_DICE = 12
+total = 0
 
 def roll_dice(num_dice):
     """Return a list of integers with length `num_dice`.
@@ -33,22 +34,36 @@ def do_stuff(input_string):
 num_dice_input = input(f"How many d6 dice do you want to roll? [1-{MAX_DICE}] ")
 num_dice = do_stuff(num_dice_input)
 
+#Set variables for dice roll
 roll_results = roll_dice(num_dice)
-
 extra_roll = None
-print(roll_results)
 
+##TODO: write something since I duplicate this twice
+total = 0
+# Iterate each element in list
+# and add them in variable total
+for ele in range(0, len(roll_results)):
+    total = total + roll_results[ele]
+print(roll_results)
+print("Total: ", total)
+
+#d6 crit success/crit fail
+#If 1st die is 6 you roll an extra dice and as long as the extra dice is 6 you keep rerolling
+#If 1st die is 1 you subtract it and the highest die
 if roll_results[0] == 6:
     extra_roll = random.randint(1, 6)
     roll_results.append(extra_roll)
     while extra_roll == 6:
         extra_roll = random.randint(1, 6)
         roll_results.append(extra_roll)
+elif roll_results[0] == 1 and len(roll_results) == 1:
+    roll_results.clear()
 elif roll_results[0] == 1:
-    roll_results.append(-(max(roll_results)))
-    roll_results.append(-1)
+    roll_results.remove(max(roll_results))
+    roll_results.pop(0)
 
 # Python program to find sum of elements in list
+##TODO: write something since I duplicate this twice
 total = 0
 
 # Iterate each element in list
@@ -62,7 +77,5 @@ if modifier_input[0] == "y":
     modifier = int(modifier)
     total = total + modifier
 
-print(roll_results)  # Remove this line after testing the app
-print("Sum of all elements in given list: ", total)
-
-#comment test
+print(roll_results)
+print("Crit Total: ", total)
