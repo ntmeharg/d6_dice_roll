@@ -2,6 +2,7 @@
 # 1. Get and validate user's input
 # dice.py
 import random
+import characters
 
 MAX_DICE = 12
 
@@ -43,18 +44,36 @@ def total_dice_roll(total,roll_results, modifier):
     print(roll_results)
     return total
 
-num_dice_input = input(f"How many d6 dice do you want to roll? [1-{MAX_DICE}] ")
-num_dice = check_number_of_dice(num_dice_input)
-
 #Set variables for dice roll
-roll_results = roll_dice(num_dice)
-modifier = 0
 total = 0
+modifier = 0
 
-modifier_input = input("Do you have any modifiers you would like to add? y/n ")
-if modifier_input[0] == "y":
-    modifier = input("How much do you want to add? ")
-    modifier = int(modifier)
+#Ask which character roll they want to use
+check_character_input = input("Which roll do you want to use? ")
+if check_character_input in characters.attributes_skills:
+    skill_input = input("Which skill would you like to use? ")
+    if skill_input in characters.attributes_skills[check_character_input]:
+        num_dice = characters.attributes_skills[check_character_input][skill_input][0]
+        modifier = characters.attributes_skills[check_character_input][skill_input][1]
+    else:
+        print("Sorry skill doesn't exist we will roll the attribute")
+        num_dice = characters.attributes_skills[check_character_input]["Default"][0]
+        modifier = characters.attributes_skills[check_character_input]["Default"][1]
+elif check_character_input in characters.weapons:
+    num_dice = characters.weapons.get(check_character_input)[0]
+    modifier = characters.weapons.get(check_character_input)[1]
+elif check_character_input in characters.armor:
+    num_dice = characters.armor.get(check_character_input)[0]
+    modifier = characters.armor.get(check_character_input)[1]
+else:
+    num_dice_input = input(f"How many d6 dice do you want to roll? [1-{MAX_DICE}] ")
+    num_dice = check_number_of_dice(num_dice_input)
+    modifier_input = input("Do you have any modifiers you would like to add? y/n ")
+    if modifier_input[0] == "y":
+        modifier = input("How much do you want to add? ")
+        modifier = int(modifier)
+
+roll_results = roll_dice(num_dice)
 
 total = total_dice_roll(total,roll_results,modifier)
 
@@ -79,3 +98,5 @@ total = 0
 total = total_dice_roll(total,roll_results,modifier)
 
 print("Crit Total: ", total)
+
+# print("Crit Total: ", total)
